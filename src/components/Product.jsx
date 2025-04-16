@@ -22,6 +22,11 @@ function Product(props) {
             <button className='delete' onClick={() => eliminarProduct(id)}>
                 Eliminar
             </button>
+
+            {/* Dario apaga se quiseres */}
+            <button className='btnFofo'>
+                Butoão Fofo que não faz anda
+            </button>
         </div>
     )
 }
