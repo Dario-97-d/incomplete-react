@@ -41,6 +41,15 @@ function App() {
     setProducts([newProduct, ...products])
   }
 
+  const updateProduct = (id, nome, preco, categoria) => {
+    setProducts(products.map(p => p.id !== id ? p : {
+      id: id,
+      nome: nome,
+      preco: preco,
+      categoria: categoria
+    }))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -91,6 +100,7 @@ function App() {
           product={product}
           toggleStock={toggleStock}
           eliminarProduct={eliminarProduct}
+          updateProduct={updateProduct}
         />)}
     </div>
   </div>
