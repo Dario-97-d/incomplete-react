@@ -46,7 +46,8 @@ function App() {
       id: id,
       nome: nome,
       preco: preco,
-      categoria: categoria
+      categoria: categoria,
+      emStock: p.emStock,
     }))
   }
 

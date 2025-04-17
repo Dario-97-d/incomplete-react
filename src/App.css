@@ -100,6 +100,17 @@ button.add{
   padding-left: 12px;
 }
 
+.edit-product {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1rem 0;
+}
+
+.edit-product input {
+  padding: 0.5em;
+}
+
 .App {
   display: flex;
   flex-direction: column;

@@ -4,7 +4,6 @@ import ProductInput from './ProductInput'
 
 function Product(props) {
 
-    const [isEditing, setEditing] = useState(false)
     const {
         product: { id, nome, preco, categoria, emStock },
         toggleStock,
@@ -12,10 +11,15 @@ function Product(props) {
         updateProduct
     } = props
 
+    const [isEditing, setEditing] = useState(false)
+    const [editNome, setNome] = useState(nome)
+    const [editPreco, setPreco] = useState(preco)
+    const [editCategoria, setCategoria] = useState(categoria)
+
     const toggleEditing = () => {
-        // if (isEditing) {
-        //     updateProduct(id, nome, preco, categoria)
-        // }
+        if (isEditing) {
+            updateProduct(id, editNome, editPreco, editCategoria)
+        }
 
         setEditing(!isEditing)
     }
@@ -24,16 +28,19 @@ function Product(props) {
         <div
             className={`product ${emStock ? "in-stock" : "out-of-stock"}`}>
             
-            {isEditing ? <ProductInput product={{nome, preco, categoria}} updateProduct={updateProduct} /> : <ProductDisplay product={{nome, preco, categoria}} />}
+            {isEditing ?
+            <ProductInput product={{nome, preco, categoria}} functions={{setNome, setPreco, setCategoria}} />
+            :
+            <ProductDisplay product={{nome, preco, categoria}} />}
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-                
-                <button onClick={() => toggleStock(id)} style={{ backgroundColor: emStock ? 'darkgreen' : 'darkred' }}>
-                    {emStock ? "Em Stock" : "Fora de Stock"}
-                </button>
 
                 <button onClick={toggleEditing} style={{ backgroundColor: isEditing ? 'blue' : 'darkblue' }}>
                     {isEditing ? "Save" : "Edit"}
+                </button>
+                
+                <button onClick={() => toggleStock(id)} style={{ backgroundColor: emStock ? 'darkgreen' : 'darkred' }}>
+                    {emStock ? "Em Stock" : "Fora de Stock"}
                 </button>
 
                 <button className='delete' onClick={() => eliminarProduct(id)}>
