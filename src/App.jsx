@@ -43,10 +43,10 @@ function App() {
 
   const updateProduct = (id, nome, preco, categoria) => {
     setProducts(products.map(p => p.id !== id ? p : {
-      id: id,
-      nome: nome,
-      preco: preco,
-      categoria: categoria,
+      id,
+      nome,
+      preco,
+      categoria,
       emStock: p.emStock,
     }))
   }

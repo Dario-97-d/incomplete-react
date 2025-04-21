@@ -12,16 +12,10 @@ function Product(props) {
     } = props
 
     const [isEditing, setEditing] = useState(false)
-    const [editNome, setNome] = useState(nome)
-    const [editPreco, setPreco] = useState(preco)
-    const [editCategoria, setCategoria] = useState(categoria)
 
-    const toggleEditing = () => {
-        if (isEditing) {
-            updateProduct(id, editNome, editPreco, editCategoria)
-        }
-
-        setEditing(!isEditing)
+    const handleSave = (id, newNome, newPreco, newCategoria) => {
+        updateProduct(id, newNome, newPreco, newCategoria)
+        setEditing(false)
     }
 
     return (
@@ -29,15 +23,16 @@ function Product(props) {
             className={`product ${emStock ? "in-stock" : "out-of-stock"}`}>
             
             {isEditing ?
-            <ProductInput product={{nome, preco, categoria}} functions={{setNome, setPreco, setCategoria}} />
+            <ProductInput product={{id, nome, preco, categoria}} onSave={handleSave} cancelEdit={() => setEditing(false)} />
             :
             <ProductDisplay product={{nome, preco, categoria}} />}
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
 
-                <button onClick={toggleEditing} style={{ backgroundColor: isEditing ? 'blue' : 'darkblue' }}>
-                    {isEditing ? "Save" : "Edit"}
-                </button>
+                {!isEditing &&
+                <button onClick={() => setEditing(true)} style={{ backgroundColor: 'darkblue' }}>
+                    Edit
+                </button>}
                 
                 <button onClick={() => toggleStock(id)} style={{ backgroundColor: emStock ? 'darkgreen' : 'darkred' }}>
                     {emStock ? "Em Stock" : "Fora de Stock"}
