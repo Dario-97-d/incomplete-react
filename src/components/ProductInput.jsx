@@ -35,7 +35,7 @@ function ProductInput(props)
                 <button type="submit" style={{ backgroundColor: 'blue', flex: '1' }}>
                     Save
                 </button>
-
+                {/* Botao para cancelar a edicao */}
                 <button onClick={cancelEdit}>❌</button>
             </div>
         </form>
